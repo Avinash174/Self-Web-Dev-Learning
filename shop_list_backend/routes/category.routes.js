@@ -46,16 +46,26 @@ router.put("/:id", (req, res) => {
 
 
 //  DELETE Category
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
-  const sql = "DELETE FROM categories WHERE id = ?";
-  db.query(sql, [id], (err) => {
-    if (err) {
-      return res.status(500).json(err);
+  db.query(
+    "DELETE FROM products WHERE category_id = ?",
+    [id],
+    (err) => {
+      if (err) return res.status(500).json(err);
+
+      db.query(
+        "DELETE FROM categories WHERE id = ?",
+        [id],
+        (err2) => {
+          if (err2) return res.status(500).json(err2);
+          res.json({ message: "Category and products deleted" });
+        }
+      );
     }
-    res.json({ message: "Category deleted" });
-  });
+  );
 });
+
 
 module.exports = router;
