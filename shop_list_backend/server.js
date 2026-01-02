@@ -1,36 +1,24 @@
-// const express = require("express");
-// // const cors = require("cors");
-
-// const app = express();
-
-// // app.use(cors());
-// app.use(express.json());
-
-// app.get("/gg", (req, res) => {
-//   res.send("Backend is running");
-// });
-
-// app.listen(5000, () => {
-//   console.log("Server running on port 5000");
-// });
-
-
+require("dotenv").config();
 
 const express = require("express");
-const cors = require("cors");
+require("./db");
+
+const authRoutes = require("./routes/auth");
+const productRoutes = require("./routes/product.routes");
 
 const app = express();
 
-app.use(cors()); // 🔑 IMPORTANT
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-app.use("/categories", require("./routes/category.routes"));
-app.use("/products", require("./routes/product.routes"));
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/products", productRoutes);
 
-app.listen(5050, () => {
-  console.log("Server running on port 5050");
+const PORT = process.env.PORT || 5050;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });

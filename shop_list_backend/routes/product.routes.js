@@ -1,88 +1,53 @@
 const express = require("express");
 const router = express.Router();
+
 const db = require("../db");
+const authMiddleware = require("../middleware/authMiddleware");
+const { getCache, setCache, deleteCache } = require("../cache");
 
+/**
+ * GET PRODUCTS
+ */
+router.get("/", authMiddleware, (req, res) => {
+  const cacheKey = "products";
 
-// 🔹 CREATE Product
-router.post("/", (req, res) => {
-  const { name, description, product_code, quantity, category_id } = req.body;
+  const cached = getCache(cacheKey);
+  if (cached) {
+    return res.json({ source: "cache", data: cached });
+  }
 
-  const sql = `
-    INSERT INTO products
-    (name, description, product_code, quantity, category_id)
-    VALUES (?, ?, ?, ?, ?)
-  `;
+  db.query("SELECT * FROM products", (err, result) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    setCache(cacheKey, result, 60);
+    res.json({ source: "db", data: result });
+  });
+});
+
+/**
+ * ADD PRODUCT
+ */
+router.post("/", authMiddleware, (req, res) => {
+  const { name, price, category_id } = req.body;
+
+  if (!name || !price) {
+    return res.status(400).json({ message: "Name and price required" });
+  }
 
   db.query(
-    sql,
-    [name, description, product_code, quantity, category_id],
+    "INSERT INTO products (name, price, category_id) VALUES (?, ?, ?)",
+    [name, price, category_id || null],
     (err, result) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      res.json({ message: "Product created", id: result.insertId });
+      if (err) return res.status(500).json({ error: err.message });
+
+      deleteCache("products");
+
+      res.status(201).json({
+        success: true,
+        productId: result.insertId,
+      });
     }
   );
-});
-
-
-// 🔹 READ All Products (with Category)
-router.get("/", (req, res) => {
-  const sql = `
-    SELECT 
-      p.id,
-      p.name,
-      p.description,
-      p.product_code,
-      p.quantity,
-      c.name AS category_name
-    FROM products p
-    JOIN categories c ON p.category_id = c.id
-  `;
-
-  db.query(sql, (err, result) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    res.json(result);
-  });
-});
-
-
-// 🔹 UPDATE Product
-router.put("/:id", (req, res) => {
-  const { name, description, product_code, quantity, category_id } = req.body;
-  const { id } = req.params;
-
-  const sql = `
-    UPDATE products
-    SET name = ?, description = ?, product_code = ?, quantity = ?, category_id = ?
-    WHERE id = ?
-  `;
-
-  db.query(
-    sql,
-    [name, description, product_code, quantity, category_id, id],
-    (err) => {
-      if (err) {
-        return res.status(500).json(err);
-      }
-      res.json({ message: "Product updated" });
-    }
-  );
-});
-
-
-// 🔹 DELETE Product
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-
-  db.query("DELETE FROM products WHERE id = ?", [id], (err) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    res.json({ message: "Product deleted" });
-  });
 });
 
 module.exports = router;

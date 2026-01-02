@@ -1,71 +1,112 @@
 const express = require("express");
 const router = express.Router();
+
 const db = require("../db");
+const { getCache, setCache, deleteCache } = require("../cache");
 
-
-//  CREATE Category
-router.post("/", (req, res) => {
-  const { name, description } = req.body;
-
-  const sql = "INSERT INTO categories (name, description) VALUES (?, ?)";
-  db.query(sql, [name, description], (err, result) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    res.json({ message: "Category created", id: result.insertId });
-  });
-});
-
-
-//  READ All Categories
+/**
+ * GET ALL CATEGORIES (CACHE ENABLED)
+ */
 router.get("/", (req, res) => {
-  const sql = "SELECT * FROM categories";
-  db.query(sql, (err, result) => {
+  const cacheKey = "categories";
+
+  const cachedData = getCache(cacheKey);
+  if (cachedData) {
+    return res.json({
+      source: "cache",
+      data: cachedData,
+    });
+  }
+
+  db.query("SELECT * FROM categories", (err, results) => {
     if (err) {
-      return res.status(500).json(err);
+      return res.status(500).json({ error: err.message });
     }
-    res.json(result);
+
+    setCache(cacheKey, results); // store in cache
+
+    res.json({
+      source: "db",
+      data: results,
+    });
   });
 });
 
-
-//  UPDATE Category
-router.put("/:id", (req, res) => {
-  const { name, description } = req.body;
-  const { id } = req.params;
-
-  const sql =
-    "UPDATE categories SET name = ?, description = ? WHERE id = ?";
-  db.query(sql, [name, description, id], (err) => {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    res.json({ message: "Category updated" });
-  });
-});
-
-
-//  DELETE Category
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
+/**
+ * ADD CATEGORY
+ */
+router.post("/", (req, res) => {
+  const { name } = req.body;
 
   db.query(
-    "DELETE FROM products WHERE category_id = ?",
-    [id],
-    (err) => {
-      if (err) return res.status(500).json(err);
+    "INSERT INTO categories (name) VALUES (?)",
+    [name],
+    (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
 
-      db.query(
-        "DELETE FROM categories WHERE id = ?",
-        [id],
-        (err2) => {
-          if (err2) return res.status(500).json(err2);
-          res.json({ message: "Category and products deleted" });
-        }
-      );
+      // 🔴 DELETE CACHE AFTER DATA CHANGE
+      deleteCache("categories");
+
+      res.json({
+        success: true,
+        message: "Category added",
+        id: result.insertId,
+      });
     }
   );
 });
 
+/**
+ * UPDATE CATEGORY
+ */
+router.put("/:id", (req, res) => {
+  const { name } = req.body;
+  const { id } = req.params;
+
+  db.query(
+    "UPDATE categories SET name=? WHERE id=?",
+    [name, id],
+    (err) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+
+      // 🔴 DELETE CACHE
+      deleteCache("categories");
+
+      res.json({
+        success: true,
+        message: "Category updated",
+      });
+    }
+  );
+});
+
+/**
+ * DELETE CATEGORY
+ */
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.query(
+    "DELETE FROM categories WHERE id=?",
+    [id],
+    (err) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+
+      // 🔴 DELETE CACHE
+      deleteCache("categories");
+
+      res.json({
+        success: true,
+        message: "Category deleted",
+      });
+    }
+  );
+});
 
 module.exports = router;
