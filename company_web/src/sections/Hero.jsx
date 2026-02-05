@@ -1,6 +1,21 @@
 import React from "react";
-import { ChevronRight } from "lucide-react";
+import {
+  ChevronRight,
+  Code,
+  Cpu,
+  Globe,
+  Server,
+  ShieldCheck,
+  Terminal,
+} from "lucide-react";
 import { motion } from "framer-motion";
+
+const TechBadge = ({ icon: Icon, label }) => (
+  <div className="tech-badge">
+    <Icon size={16} />
+    <span>{label}</span>
+  </div>
+);
 
 const Hero = ({ scrollToSection }) => {
   return (
@@ -26,24 +41,35 @@ const Hero = ({ scrollToSection }) => {
           cutting-edge technology and AI-driven insights.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="hero-buttons"
-        >
+        <div className="hero-actions">
           <button
             className="btn btn-primary"
             onClick={() => scrollToSection("contact")}
           >
-            Get Started <ChevronRight size={20} />
+            Start Project <ChevronRight size={20} />
           </button>
           <button
             className="btn btn-secondary"
             onClick={() => scrollToSection("services")}
           >
-            Learn More
+            View Our Work
           </button>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="tech-stack-container"
+        >
+          <p className="text-secondary text-sm mb-4">POWERED BY MODERN STACK</p>
+          <div className="tech-badges">
+            <TechBadge icon={Code} label="React/Next.js" />
+            <TechBadge icon={Server} label="Node & Python" />
+            <TechBadge icon={Cpu} label="AI/ML Models" />
+            <TechBadge icon={Globe} label="Cloud Native" />
+            <TechBadge icon={ShieldCheck} label="Cybersecurity" />
+          </div>
         </motion.div>
       </div>
     </section>
