@@ -4,10 +4,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="container text-center">
-        <p>
-          &copy; {new Date().getFullYear()} NovaTech Solutions. All rights
-          reserved.
-        </p>
+        <p>&copy; {new Date().getFullYear()} MindSpire. All rights reserved.</p>
       </div>
     </footer>
   );

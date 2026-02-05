@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Rocket, Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import logo from "../assets/logo.png";
 import { motion } from "framer-motion";
 
 const Navbar = ({ scrollToSection, theme, toggleTheme }) => {
@@ -28,8 +29,13 @@ const Navbar = ({ scrollToSection, theme, toggleTheme }) => {
             handleScroll("home");
           }}
         >
-          <Rocket className="logo-icon" />
-          <span>Velox Labs</span>
+          <img
+            src={logo}
+            alt="MindSpire Logo"
+            className="logo-icon"
+            style={{ borderRadius: "8px" }}
+          />
+          <span>MindSpire</span>
         </a>
 
         <div className="nav-links">
@@ -41,6 +47,19 @@ const Navbar = ({ scrollToSection, theme, toggleTheme }) => {
           </button>
           <button className="nav-link" onClick={() => handleScroll("about")}>
             About
+          </button>
+          <button
+            className="nav-link"
+            onClick={toggleTheme}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "0.5rem",
+            }}
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           <button
             className="btn btn-primary"
@@ -83,6 +102,14 @@ const Navbar = ({ scrollToSection, theme, toggleTheme }) => {
           </button>
           <button className="nav-link" onClick={() => handleScroll("about")}>
             About
+          </button>
+          <button
+            className="nav-link"
+            onClick={toggleTheme}
+            style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            {theme === "dark" ? "Light Mode" : "Dark Mode"}
           </button>
           <button
             className="btn btn-primary"
