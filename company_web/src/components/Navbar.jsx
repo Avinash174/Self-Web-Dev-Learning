@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Rocket, Menu, X } from "lucide-react";
+import { Rocket, Menu, X, Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 
-const Navbar = ({ scrollToSection }) => {
+const Navbar = ({ scrollToSection, theme, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -29,7 +29,7 @@ const Navbar = ({ scrollToSection }) => {
           }}
         >
           <Rocket className="logo-icon" />
-          <span>NovaTech</span>
+          <span>Velox Labs</span>
         </a>
 
         <div className="nav-links">

@@ -1,12 +1,35 @@
 import React from "react";
-import { Zap, Shield, Rocket } from "lucide-react";
+import {
+  Zap,
+  Shield,
+  Rocket,
+  Smartphone,
+  Globe,
+  Brain,
+  BarChart,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const services = [
   {
-    icon: <Zap size={32} />,
-    title: "Rapid Development",
-    desc: "Accelerate your go-to-market strategy with our agile development methodologies and modern tech stack.",
+    icon: <Globe size={32} />,
+    title: "Web Development",
+    desc: "Modern, responsive, and high-performance web applications built with the latest technologies.",
+  },
+  {
+    icon: <Smartphone size={32} />,
+    title: "Mobile Development",
+    desc: "Native and cross-platform mobile apps for Android and iOS that deliver seamless user experiences.",
+  },
+  {
+    icon: <BarChart size={32} />,
+    title: "Data Science & Analytics",
+    desc: "Transform your raw data into actionable insights with our advanced analytics and visualization services.",
+  },
+  {
+    icon: <Brain size={32} />,
+    title: "Machine Learning (AI)",
+    desc: "Leverage the power of AI and predictive modeling to automate processes and drive innovation.",
   },
   {
     icon: <Shield size={32} />,

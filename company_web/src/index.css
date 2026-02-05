@@ -25,6 +25,22 @@
   color-scheme: dark;
 }
 
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f4f4f5;
+  --bg-tertiary: #e4e4e7;
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-tertiary: #71717a;
+  --border-color: #d4d4d8;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-accent: 0 0 20px rgba(59, 130, 246, 0.25);
+  color-scheme: light;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
