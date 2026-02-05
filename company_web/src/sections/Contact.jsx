@@ -50,67 +50,27 @@ const Contact = () => {
               drive meaningful growth.
             </p>
 
-            <div
-              className="info-item"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                marginBottom: "1.5rem",
-              }}
-            >
-              <div
-                style={{
-                  background: "rgba(99, 102, 241, 0.1)",
-                  padding: "12px",
-                  borderRadius: "12px",
-                  color: "var(--accent-primary)",
-                }}
-              >
-                <Mail size={24} />
+            <div className="contact-items">
+              <div className="contact-item">
+                <div className="contact-icon-box">
+                  <Mail size={24} />
+                </div>
+                <span>hello@mindspire.tech</span>
               </div>
-              <span style={{ fontSize: "1.1rem" }}>hello@mindspire.tech</span>
-            </div>
 
-            <div
-              className="info-item"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                marginBottom: "1.5rem",
-              }}
-            >
-              <div
-                style={{
-                  background: "rgba(99, 102, 241, 0.1)",
-                  padding: "12px",
-                  borderRadius: "12px",
-                  color: "var(--accent-primary)",
-                }}
-              >
-                <MapPin size={24} />
+              <div className="contact-item">
+                <div className="contact-icon-box">
+                  <MapPin size={24} />
+                </div>
+                <span>101 Innovation Blvd, Silicon Valley, CA</span>
               </div>
-              <span style={{ fontSize: "1.1rem" }}>
-                101 Innovation Blvd, Silicon Valley, CA
-              </span>
-            </div>
 
-            <div
-              className="info-item"
-              style={{ display: "flex", alignItems: "center", gap: "1rem" }}
-            >
-              <div
-                style={{
-                  background: "rgba(99, 102, 241, 0.1)",
-                  padding: "12px",
-                  borderRadius: "12px",
-                  color: "var(--accent-primary)",
-                }}
-              >
-                <Phone size={24} />
+              <div className="contact-item">
+                <div className="contact-icon-box">
+                  <Phone size={24} />
+                </div>
+                <span>+1 (415) 555-0123</span>
               </div>
-              <span style={{ fontSize: "1.1rem" }}>+1 (415) 555-0123</span>
             </div>
           </div>
 
@@ -166,32 +126,12 @@ const Contact = () => {
             </button>
 
             {status === "success" && (
-              <div
-                className="success-message fade-in"
-                style={{
-                  marginTop: "1rem",
-                  padding: "1rem",
-                  background: "rgba(16, 185, 129, 0.1)",
-                  color: "#10b981",
-                  borderRadius: "8px",
-                  border: "1px solid rgba(16, 185, 129, 0.2)",
-                }}
-              >
+              <div className="status-message success fade-in">
                 Message sent successfully! We'll get back to you soon.
               </div>
             )}
             {status === "error" && (
-              <div
-                className="error-message fade-in"
-                style={{
-                  marginTop: "1rem",
-                  padding: "1rem",
-                  background: "rgba(239, 68, 68, 0.1)",
-                  color: "#ef4444",
-                  borderRadius: "8px",
-                  border: "1px solid rgba(239, 68, 68, 0.2)",
-                }}
-              >
+              <div className="status-message error fade-in">
                 Something went wrong. Please try again.
               </div>
             )}

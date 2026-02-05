@@ -63,12 +63,29 @@ const Hero = ({ scrollToSection }) => {
           className="tech-stack-container"
         >
           <p className="text-secondary text-sm mb-4">POWERED BY MODERN STACK</p>
-          <div className="tech-badges">
-            <TechBadge icon={Code} label="React/Next.js" />
-            <TechBadge icon={Server} label="Node & Python" />
-            <TechBadge icon={Cpu} label="AI/ML Models" />
-            <TechBadge icon={Globe} label="Cloud Native" />
-            <TechBadge icon={ShieldCheck} label="Cybersecurity" />
+          <div className="tech-marquee-wrapper">
+            <div className="tech-marquee">
+              {/* First set of badges */}
+              <TechBadge icon={Code} label="React/Next.js" />
+              <TechBadge icon={Server} label="Node & Python" />
+              <TechBadge icon={Cpu} label="AI/ML Models" />
+              <TechBadge icon={Globe} label="Cloud Native" />
+              <TechBadge icon={ShieldCheck} label="Cybersecurity" />
+
+              {/* Duplicated set for seamless loop */}
+              <TechBadge icon={Code} label="React/Next.js" />
+              <TechBadge icon={Server} label="Node & Python" />
+              <TechBadge icon={Cpu} label="AI/ML Models" />
+              <TechBadge icon={Globe} label="Cloud Native" />
+              <TechBadge icon={ShieldCheck} label="Cybersecurity" />
+
+              {/* Triplicated set for wide screens */}
+              <TechBadge icon={Code} label="React/Next.js" />
+              <TechBadge icon={Server} label="Node & Python" />
+              <TechBadge icon={Cpu} label="AI/ML Models" />
+              <TechBadge icon={Globe} label="Cloud Native" />
+              <TechBadge icon={ShieldCheck} label="Cybersecurity" />
+            </div>
           </div>
         </motion.div>
       </div>

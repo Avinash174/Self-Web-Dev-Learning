@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import logo from "../assets/logo.png";
+import logo from "/logo.svg";
 import { motion } from "framer-motion";
 
 const Navbar = ({ scrollToSection, theme, toggleTheme }) => {
