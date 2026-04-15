@@ -1,0 +1,10 @@
+.nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.4rem 6vw; backdrop-filter:blur(24px); background:rgba(5,10,6,0.82); border-bottom:1px solid var(--border); }
+.logo { font-family:var(--font-display); font-weight:900; font-size:1.4rem; color:var(--heading); }
+.dot { color:var(--amber); display:inline-block; animation:wobble 3s ease-in-out infinite; }
+@keyframes wobble { 0%,100%{transform:rotate(0)} 30%{transform:rotate(-8deg)} 70%{transform:rotate(8deg)} }
+.links { display:flex; gap:2.5rem; list-style:none; }
+.link { color:var(--muted); text-decoration:none; font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; position:relative; transition:color 0.3s; }
+.link::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1.5px; background:var(--amber); transition:width 0.3s; }
+.link:hover,.link.active { color:var(--amber); }
+.link:hover::after,.link.active::after { width:100%; }
+@media(max-width:600px){ .links{display:none;} }

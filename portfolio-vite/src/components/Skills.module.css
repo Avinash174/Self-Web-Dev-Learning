@@ -1,0 +1,12 @@
+.grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+.box { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:2rem; position:relative; overflow:hidden; transition:transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
+.box::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(74,222,128,0.04),transparent 55%); opacity:0; transition:opacity 0.3s; }
+.box:hover { transform:translateY(-4px); border-color:rgba(74,222,128,0.3); box-shadow:0 24px 48px rgba(0,0,0,0.4); }
+.box:hover::before { opacity:1; }
+.boxHdr { display:flex; align-items:center; gap:0.8rem; margin-bottom:1.5rem; }
+.icon { width:36px; height:36px; display:grid; place-items:center; background:rgba(74,222,128,0.1); border-radius:8px; font-size:1.1rem; }
+.boxTitle { font-size:0.76rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--green2); }
+.pills { display:flex; flex-wrap:wrap; gap:0.45rem; }
+.pill { background:rgba(5,10,6,0.85); border:1px solid rgba(74,222,128,0.18); color:var(--text); font-size:0.79rem; font-weight:500; padding:0.28rem 0.75rem; border-radius:100px; transition:background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s; cursor:default; }
+.pill:hover { background:rgba(74,222,128,0.1); border-color:var(--green); color:var(--green2); transform:translateY(-1px); }
+@media(max-width:900px){ .grid{grid-template-columns:1fr;} }

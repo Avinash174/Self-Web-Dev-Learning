@@ -1,0 +1,18 @@
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:8rem 6vw 5rem; position:relative; z-index:1; }
+.eyebrow { display:flex; align-items:center; gap:1rem; margin-bottom:2rem; opacity:0; animation:slideRight 0.7s 0.2s ease forwards; }
+.eyebrowLine { width:60px; height:1px; background:linear-gradient(90deg, var(--amber), transparent); }
+.eyebrowText { font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--amber); }
+.name { font-family:var(--font-display); font-size:clamp(4rem,11vw,9rem); font-weight:900; line-height:0.9; letter-spacing:-0.03em; color:var(--heading); margin-bottom:0.2rem; opacity:0; animation:slideUp 0.8s 0.3s cubic-bezier(0.22,1,0.36,1) forwards; }
+.nameOutline { font-family:var(--font-display); font-size:clamp(4rem,11vw,9rem); font-weight:900; line-height:0.9; letter-spacing:-0.03em; color:transparent; -webkit-text-stroke:1.5px var(--green); margin-bottom:2.5rem; opacity:0; animation:slideUp 0.8s 0.4s cubic-bezier(0.22,1,0.36,1) forwards; }
+.tagline { font-size:clamp(1rem,2vw,1.2rem); color:var(--muted); font-weight:300; max-width:500px; line-height:1.8; margin-bottom:3rem; opacity:0; animation:slideUp 0.8s 0.55s ease forwards; }
+.tagline strong { color:var(--green2); font-weight:500; }
+.tw { color:var(--green2); font-weight:500; border-right:2px solid var(--green); padding-right:2px; animation:blink 0.75s step-end infinite; }
+.cta { display:flex; gap:1.2rem; align-items:center; flex-wrap:wrap; opacity:0; animation:slideUp 0.7s 0.7s ease forwards; }
+.scroll { position:absolute; bottom:3rem; right:6vw; display:flex; flex-direction:column; align-items:center; gap:0.8rem; opacity:0; animation:fadeIn 1s 1.2s ease forwards; }
+.scrollText { writing-mode:vertical-rl; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); }
+.scrollBar { width:1px; height:60px; background:linear-gradient(180deg, var(--amber), transparent); animation:scrollbar 1.6s ease-in-out infinite; }
+@keyframes slideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:none} }
+@keyframes slideRight { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:none} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes blink { 0%,100%{border-color:var(--green)} 50%{border-color:transparent} }
+@keyframes scrollbar { 0%{opacity:1;transform:scaleY(1)} 100%{opacity:0;transform:scaleY(0.3)} }
